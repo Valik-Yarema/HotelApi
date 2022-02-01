@@ -54,6 +54,12 @@ namespace HotelApi
                 options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
 
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyApp",
+                    policy => policy.AllowAnyOrigin());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,8 +76,7 @@ namespace HotelApi
                 app.UseHsts();
             }
 
-            app.UseMvc();
-
+           
             app.UseRouting();
 
             app.UseAuthorization();
@@ -80,6 +85,11 @@ namespace HotelApi
             {
                 endpoints.MapControllers();
             });
+
+            app.UseCors("AllowMyApp");
+
+            app.UseMvc();
+
         }
     }
 }
