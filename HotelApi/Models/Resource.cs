@@ -4,7 +4,7 @@ namespace HotelApi.Models
 {
     public abstract class Resource
     {
-        [JsonProperty(Order = -2)]
+        [JsonProperty(Order = -10)]
         public string Href { get; set; }
     }
 }
